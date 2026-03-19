@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paneler — The Fabricators</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --blue: #2a5c8f; --blue-dark: #1a3a5c; --blue-deep: #0d1f33; --gold: #d4a825; --gold-light: #f0c840; --white: #f5f5f5; --panel-bg: #111827; }
+    body { font-family: 'Inter', sans-serif; background: var(--blue-deep); color: var(--white); overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle, rgba(42,92,143,0.15) 1px, transparent 1px); background-size: 12px 12px; pointer-events: none; z-index: 0; }
+    section, nav, footer { position: relative; z-index: 1; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(13,31,51,0.95); border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 100; }
+    .nav-back { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--gold-light); text-decoration: none; letter-spacing: 2px; }
+    .nav-back:hover { color: var(--white); }
+    .nav-tool { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--white); letter-spacing: 2px; }
+    .hero { display: flex; align-items: center; justify-content: center; gap: 3rem; padding: 4rem 2rem; min-height: 70vh; background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-dark) 50%, var(--blue-deep) 100%); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; left: -10%; width: 120%; height: 200%; background: repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(212,168,37,0.04) 40px, rgba(212,168,37,0.04) 80px); pointer-events: none; }
+    .hero-icon { z-index: 1; }
+    .hero-icon img { width: 140px; height: 140px; border-radius: 24px; border: 3px solid var(--gold); box-shadow: 0 0 30px rgba(212,168,37,0.3), 6px 6px 0 var(--blue-dark); }
+    .hero-text { max-width: 520px; z-index: 1; }
+    .hero-text h1 { font-family: 'Bangers', cursive; font-size: 4rem; line-height: 1; color: var(--gold-light); text-shadow: 3px 3px 0 var(--blue-dark); margin-bottom: 0.5rem; }
+    .hero-tagline { font-family: 'Bangers', cursive; font-size: 1.5rem; color: var(--white); letter-spacing: 1px; margin-bottom: 1.25rem; }
+    .hero-desc { font-size: 1.05rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 2rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2rem; font-family: 'Bangers', cursive; font-size: 1.3rem; letter-spacing: 2px; text-decoration: none; border: 3px solid var(--gold); border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .btn-primary { background: var(--gold); color: var(--blue-deep); }
+    .btn-primary:hover { background: var(--gold-light); box-shadow: 0 0 20px rgba(240,200,64,0.4); transform: translateY(-2px); }
+    .graphic-section { padding: 4rem 2rem; background: var(--panel-bg); border-top: 3px solid var(--blue); border-bottom: 3px solid var(--blue); display: flex; justify-content: center; }
+    .graphic-placeholder { width: 100%; max-width: 900px; aspect-ratio: 16/9; border: 3px dashed rgba(212,168,37,0.4); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #475569; font-size: 1rem; font-style: italic; }
+    .features { padding: 4rem 2rem; }
+    .section-title { font-family: 'Bangers', cursive; font-size: 2.4rem; color: var(--gold-light); text-align: center; margin-bottom: 0.5rem; text-shadow: 2px 2px 0 rgba(0,0,0,0.3); }
+    .section-subtitle { text-align: center; color: #94a3b8; margin-bottom: 2.5rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+    .feature-card { background: rgba(42,92,143,0.12); border: 2px solid rgba(42,92,143,0.4); border-radius: 12px; padding: 1.5rem; }
+    .feature-card h3 { font-family: 'Bangers', cursive; font-size: 1.3rem; color: var(--gold-light); letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .feature-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
+    .download { padding: 4rem 2rem; text-align: center; background: var(--panel-bg); border-top: 3px solid var(--blue); }
+    .download p { color: #94a3b8; margin-bottom: 1.5rem; }
+    footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.85rem; border-top: 1px solid rgba(42,92,143,0.3); }
+    footer a { color: var(--gold); text-decoration: none; }
+    @media (max-width: 768px) { .hero { flex-direction: column; text-align: center; min-height: auto; padding: 3rem 1.5rem; } .hero-text h1 { font-size: 2.8rem; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../../" class="nav-back">&#8592; The Fabricators</a>
+    <span class="nav-tool">Paneler</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-icon">
+      <img src="icon.png" alt="Paneler icon">
+    </div>
+    <div class="hero-text">
+      <h1>Paneler</h1>
+      <p class="hero-tagline">Curved Surface Paneling from Sheet Material</p>
+      <p class="hero-desc">
+        Decomposes a curved 3D surface into flat, developable strips that unfold without distortion.
+        Control the target panel count, maximum bend angle, and edge joinery style —
+        from seams and tabs to puzzle and gear joints.
+      </p>
+      <a href="#" class="btn btn-primary">&#11015; Download Paneler</a>
+    </div>
+  </section>
+
+  <section class="graphic-section">
+    <img src="action.png" alt="Paneler in action" style="width:100%; max-width:900px; border-radius:12px; border:3px solid var(--gold); box-shadow:0 0 30px rgba(212,168,37,0.2);">
+  </section>
+
+  <section class="features">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Greedy merge algorithm turns any mesh into fabricatable panels</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Greedy Merge</h3>
+        <p>The paneling algorithm iteratively merges nearly-coplanar mesh faces into flat developable strips, minimizing distortion.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Target Panel Count</h3>
+        <p>Set how many panels you want. More panels means smaller, flatter pieces; fewer means larger strips that may need bending.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Bend Angle Control</h3>
+        <p>The max dihedral angle setting controls how sharp a bend is allowed inside a single panel before forcing a seam.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Joinery Options</h3>
+        <p>Nine edge joinery types: seam, tab, tongue, puzzle, diamond, gear, rivet, laced, or trivial overlap.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Parts Layout</h3>
+        <p>View panels laid out flat on stock sheets. Auto Scale finds the largest scale that fits within a given page count.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Export</h3>
+        <p>Outputs PDF or EPS panel cut files with all joinery geometry included.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="download">
+    <h2 class="section-title">Get Paneler</h2>
+    <p>Free to download. macOS only.</p>
+    <a href="#" class="btn btn-primary">&#11015; Download for macOS</a>
+  </section>
+
+  <footer>
+    <p><a href="../../">The Fabricators</a></p>
+  </footer>
+
+</body>
+</html>
